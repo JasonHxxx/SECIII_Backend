@@ -22,10 +22,10 @@ public class TaskServiceIml implements TaskService {
 
     // 发包方查看已发布任务
     @Override
-    public List<TaskVO> getPostedTasks(Integer uid){
+    public List<TaskVO> getPostedTasks(Integer uid) {
         List<TaskVO> postedTasks = new ArrayList<>();
         List<Task> tasksList = taskMapper.selectByUid(uid);
-        for(Task task:tasksList){
+        for (Task task : tasksList) {
             postedTasks.add(new TaskVO(task));
         }
         return postedTasks;
@@ -33,20 +33,20 @@ public class TaskServiceIml implements TaskService {
 
     @Override
     public ResultVO<TaskVO> postTask(TaskVO taskVO) {
-        for(Task task: taskMapper.selectByUid(taskVO.getUid())){
+        for (Task task : taskMapper.selectByUid(taskVO.getUid())) {
             if (task.getName().equals(taskVO.getName()))
                 return new ResultVO<>(Constant.REQUEST_FAIL, "已存在同名任务！");
         }
-        Task task  =new Task(taskVO);
-        if(taskMapper.insert(task) > 0){
+        Task task = new Task(taskVO);
+        if (taskMapper.insert(task) > 0) {
             return new ResultVO<TaskVO>(Constant.REQUEST_SUCCESS, "任务发布成功。", new TaskVO(task));
         }
         return new ResultVO<>(Constant.REQUEST_FAIL, "服务器错误");
     }
 
     @Override
-    public PageInfo<TaskVO> getHallTasks(Integer currPage, Integer pageSize){
-        if(currPage==null || currPage<1) currPage=1;
+    public PageInfo<TaskVO> getHallTasks(Integer currPage, Integer pageSize) {
+        if (currPage == null || currPage < 1) currPage = 1;
         PageHelper.startPage(currPage, pageSize);
         PageInfo<Task> po = new PageInfo<>(taskMapper.selectAll());
         PageInfo<TaskVO> tasks = PageInfoUtil.convert(po, TaskVO.class);

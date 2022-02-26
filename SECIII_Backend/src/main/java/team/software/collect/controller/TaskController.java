@@ -33,7 +33,7 @@ public class TaskController {
     }
 
     @GetMapping("/all/{page}")
-    @ApiOperation(value="用户：获取任务大厅的任务（正在招募中的任务）", tags={"<tag01>--获取任务列表"}, notes="get请求，根据page请求任务大厅一定长度的任务列表")
+    @ApiOperation(value="用户：获取任务大厅的任务（正在招募中的任务）", tags={"<tag02>--获取任务列表"}, notes="get请求，根据page请求任务大厅一定长度的任务列表")
     @ApiImplicitParam(name = "page", value = "页码", paramType = "path", required = true)
     public PageInfo<TaskVO> getHallTasks(@PathVariable Integer page) {
         return taskService.getHallTasks(page, Constant.COURSE_PAGE_SIZE);

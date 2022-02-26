@@ -34,9 +34,9 @@
   </delete>
   <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="team.software.collect.po.user.UserInfo" useGeneratedKeys="true">
     insert into user_info (uname, phone, `password`,
-      `user_role`, create_time)
+                           `user_role`, create_time)
     values (#{uname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{userRole,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+            #{userRole,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="team.software.collect.po.user.UserInfo" useGeneratedKeys="true">
     insert into user_info
@@ -99,10 +99,10 @@
   <update id="updateByPrimaryKey" parameterType="team.software.collect.po.user.UserInfo">
     update user_info
     set uname = #{uname,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      `user_role` = #{userRole,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+        phone = #{phone,jdbcType=VARCHAR},
+        `password` = #{password,jdbcType=VARCHAR},
+        `user_role` = #{userRole,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP}
     where `uid` = #{uid,jdbcType=INTEGER}
   </update>
 </mapper>

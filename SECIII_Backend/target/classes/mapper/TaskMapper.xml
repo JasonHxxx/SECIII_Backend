@@ -27,11 +27,11 @@
   </delete>
   <insert id="insert" keyColumn="tid" keyProperty="tid" parameterType="team.software.collect.po.task.Task" useGeneratedKeys="true">
     insert into task (`uid`, `name`, intro,
-      max_workers, worker_cnt, begin_time,
-      end_time, `type`)
+                      max_workers, worker_cnt, begin_time,
+                      end_time, `type`)
     values (#{uid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR},
-      #{maxWorkers,jdbcType=INTEGER}, #{workerCnt,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP},
-      #{endTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR})
+            #{maxWorkers,jdbcType=INTEGER}, #{workerCnt,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP},
+            #{endTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="tid" keyProperty="tid" parameterType="team.software.collect.po.task.Task" useGeneratedKeys="true">
     insert into task
@@ -121,13 +121,13 @@
   <update id="updateByPrimaryKey" parameterType="team.software.collect.po.task.Task">
     update task
     set `uid` = #{uid,jdbcType=INTEGER},
-      `name` = #{name,jdbcType=VARCHAR},
-      intro = #{intro,jdbcType=VARCHAR},
-      max_workers = #{maxWorkers,jdbcType=INTEGER},
-      worker_cnt = #{workerCnt,jdbcType=INTEGER},
-      begin_time = #{beginTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
-      `type` = #{type,jdbcType=VARCHAR}
+        `name` = #{name,jdbcType=VARCHAR},
+        intro = #{intro,jdbcType=VARCHAR},
+        max_workers = #{maxWorkers,jdbcType=INTEGER},
+        worker_cnt = #{workerCnt,jdbcType=INTEGER},
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+        `type` = #{type,jdbcType=VARCHAR}
     where tid = #{tid,jdbcType=INTEGER}
   </update>
   <select id="selectByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
