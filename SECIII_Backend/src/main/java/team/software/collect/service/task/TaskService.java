@@ -13,4 +13,6 @@ public interface TaskService {
     ResultVO<TaskVO> postTask(TaskVO taskVO);
     //根据page获取大厅任务信息
     PageInfo<TaskVO> getHallTasks(Integer currPage, Integer pageSize);
+    // 查询单门课程
+    TaskVO getTaskDetail(Integer taskId, Integer uid);
 }

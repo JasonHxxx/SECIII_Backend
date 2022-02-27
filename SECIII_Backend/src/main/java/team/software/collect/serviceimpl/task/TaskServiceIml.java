@@ -53,4 +53,8 @@ public class TaskServiceIml implements TaskService {
         return tasks;
     }
 
+    @Override
+    public TaskVO getTaskDetail(Integer taskId, Integer uid) {
+        return null;
+    }
 }

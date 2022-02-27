@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.software.collect.mapperservice.filepicture.FilePictureMapper">
+  <resultMap id="BaseResultMap" type="team.software.collect.po.filepicture.FilePicture">
+    <id column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="file_size" jdbcType="DOUBLE" property="fileSize" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fid, tid, rid, title, file_name, file_type, file_size, upload_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from file_picture
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from file_picture
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="fid" keyProperty="fid" parameterType="team.software.collect.po.filepicture.FilePicture" useGeneratedKeys="true">
+    insert into file_picture (tid, rid, title, 
+      file_name, file_type, file_size, 
+      upload_time)
+    values (#{tid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, #{fileSize,jdbcType=DOUBLE}, 
+      #{uploadTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="fid" keyProperty="fid" parameterType="team.software.collect.po.filepicture.FilePicture" useGeneratedKeys="true">
+    insert into file_picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="fileName != null">
+        file_name,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="fileSize != null">
+        file_size,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=DOUBLE},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.software.collect.po.filepicture.FilePicture">
+    update file_picture
+    <set>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null">
+        rid = #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        file_size = #{fileSize,jdbcType=DOUBLE},
+      </if>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.software.collect.po.filepicture.FilePicture">
+    update file_picture
+    set tid = #{tid,jdbcType=INTEGER},
+      rid = #{rid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=DOUBLE},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

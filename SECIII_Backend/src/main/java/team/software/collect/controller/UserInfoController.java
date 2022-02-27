@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-@Api(value="用户controller", tags = "用户接口")
+@Api(value="用户controller", tags = "1.用户接口")
 @RestController
 @RequestMapping("/user")
 public class UserInfoController {

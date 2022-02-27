@@ -3,6 +3,54 @@
   <component name="PersistentConfig">
     <option name="historyConfigList">
       <map>
+        <entry key="file_picture">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="FilePictureMapper" />
+              <option name="daoPackage" value="team.software.collect.mapperservice.filepicture" />
+              <option name="daoPostfix" value="Mapper" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="FilePicture" />
+              <option name="modelPackage" value="team.software.collect.po.filepicture" />
+              <option name="name" value="file_picture" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="fid" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="file_picture" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="report">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="ReportMapper" />
+              <option name="daoPackage" value="team.software.collect.mapperservice.report" />
+              <option name="daoPostfix" value="Mapper" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="Report" />
+              <option name="modelPackage" value="team.software.collect.po.report" />
+              <option name="name" value="report" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="rid" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="report" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
+            </Config>
+          </value>
+        </entry>
         <entry key="task">
           <value>
             <Config>
@@ -24,6 +72,30 @@
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
               <option name="xmlPackage" value="" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="task_order">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="TaskOrderMapper" />
+              <option name="daoPackage" value="team.software.collect.mapperservice.task" />
+              <option name="daoPostfix" value="Mapper" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="TaskOrder" />
+              <option name="modelPackage" value="team.software.collect.po.task" />
+              <option name="name" value="task_order" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="id" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="task_order" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
             </Config>
           </value>
         </entry>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.software.collect.mapperservice.report.ReportMapper">
+  <resultMap id="BaseResultMap" type="team.software.collect.po.report.Report">
+    <id column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="recoverTips" jdbcType="VARCHAR" property="recovertips" />
+    <result column="device" jdbcType="VARCHAR" property="device" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rid, `uid`, tid, intro, recoverTips, device
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from report
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="rid" keyProperty="rid" parameterType="team.software.collect.po.report.Report" useGeneratedKeys="true">
+    insert into report (`uid`, tid, intro, 
+      recoverTips, device)
+    values (#{uid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR}, 
+      #{recovertips,jdbcType=VARCHAR}, #{device,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="rid" keyProperty="rid" parameterType="team.software.collect.po.report.Report" useGeneratedKeys="true">
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="recovertips != null">
+        recoverTips,
+      </if>
+      <if test="device != null">
+        device,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="recovertips != null">
+        #{recovertips,jdbcType=VARCHAR},
+      </if>
+      <if test="device != null">
+        #{device,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.software.collect.po.report.Report">
+    update report
+    <set>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="recovertips != null">
+        recoverTips = #{recovertips,jdbcType=VARCHAR},
+      </if>
+      <if test="device != null">
+        device = #{device,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.software.collect.po.report.Report">
+    update report
+    set `uid` = #{uid,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=INTEGER},
+      intro = #{intro,jdbcType=VARCHAR},
+      recoverTips = #{recovertips,jdbcType=VARCHAR},
+      device = #{device,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>
