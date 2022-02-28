@@ -20,14 +20,14 @@ public class ReportController {
     private ReportService reportService;
 
     @PostMapping("/uploadTest")
-    @ApiOperation(value="众包工人：上传测试报告")
+    @ApiOperation(value="√ 众包工人：上传测试报告")
     public ResultVO<ReportVO> postReport(@RequestBody ReportVO reportVO) {
         return reportService.postReport(reportVO);
     }
 
     //todo
     @GetMapping("/{uid}")
-    @ApiOperation(value="发包方：获取已发布任务的测试报告",tags={"<tag02>--获取测试报告列表"})
+    @ApiOperation(value="√ 发包方：获取已发布任务的测试报告")
     public List<ReportVO> getReportsByTid(@PathVariable Integer uid, @RequestParam Integer tid) {
         return reportService.getReportsByTid(uid,tid);
     }

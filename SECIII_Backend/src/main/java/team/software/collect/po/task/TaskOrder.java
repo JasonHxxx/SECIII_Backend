@@ -3,6 +3,8 @@ package team.software.collect.po.task;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import io.swagger.models.auth.In;
 import lombok.Data;
 import team.software.collect.vo.task.TaskOrderVO;
 
@@ -50,13 +52,11 @@ public class TaskOrder implements Serializable {
     public TaskOrder(){
     }
 
-    public TaskOrder(TaskOrderVO taskOrderVO){
-        id=taskOrderVO.getId();
-        cost=taskOrderVO.getCost();
-        tid=taskOrderVO.getTid();
-        uid=taskOrderVO.getUid();
-        createTime=taskOrderVO.getCreateTime();
-        endTime=taskOrderVO.getEndTime();
+    public TaskOrder(Integer uid, Integer tid){
+        this.tid=tid;
+        this.uid=uid;
+        createTime=new Date();
+        finished=0;
     }
 
     private static final long serialVersionUID = 1L;

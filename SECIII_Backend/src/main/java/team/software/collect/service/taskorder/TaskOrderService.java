@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface TaskOrderService {
     ResultVO<TaskOrderVO> confirmTask(Integer userId, Integer taskId);
+    // 众包工人查看正在执行的任务
+    List<TaskVO> getUnfinishedTasks(Integer uid);
     // 众包工人查看已完成任务
     List<TaskVO> getFinishedTasks(Integer uid);
 }

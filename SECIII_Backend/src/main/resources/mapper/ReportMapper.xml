@@ -13,7 +13,7 @@
     rid, `uid`, tid, intro, recoverTips, device
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from report
     where rid = #{rid,jdbcType=INTEGER}
@@ -23,9 +23,9 @@
     where rid = #{rid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="rid" keyProperty="rid" parameterType="team.software.collect.po.report.Report" useGeneratedKeys="true">
-    insert into report (`uid`, tid, intro, 
+    insert into report (`uid`, tid, intro,
       recoverTips, device)
-    values (#{uid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR}, 
+    values (#{uid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR},
       #{recovertips,jdbcType=VARCHAR}, #{device,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="rid" keyProperty="rid" parameterType="team.software.collect.po.report.Report" useGeneratedKeys="true">
@@ -95,4 +95,10 @@
       device = #{device,jdbcType=VARCHAR}
     where rid = #{rid,jdbcType=INTEGER}
   </update>
+  <select id="selectByTid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from report
+    where tid = #{tid, jdbcType=INTEGER}
+  </select>
 </mapper>

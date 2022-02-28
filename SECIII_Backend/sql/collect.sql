@@ -134,6 +134,6 @@ CREATE TABLE `user_info`  (
 -- Records of user_info
 -- ----------------------------
 INSERT INTO `user_info` VALUES (1, 'user1', '1', '1', 'TASKPOSTER', '2022-02-21 10:53:09');
-INSERT INTO `user_info` VALUES (2, 'user2', '2', '2', 'post', '2022-02-27 21:07:55');
+INSERT INTO `user_info` VALUES (2, 'user2', '2', '2', 'WORKER', '2022-02-27 21:07:55');
 
 SET FOREIGN_KEY_CHECKS = 1;

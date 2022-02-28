@@ -14,7 +14,7 @@
     id, cost, tid, `uid`, create_time, end_time, finished
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from task_order
     where id = #{id,jdbcType=INTEGER}
@@ -24,10 +24,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="team.software.collect.po.task.TaskOrder" useGeneratedKeys="true">
-    insert into task_order (cost, tid, `uid`, 
+    insert into task_order (cost, tid, `uid`,
       create_time, end_time, finished
       )
-    values (#{cost,jdbcType=DECIMAL}, #{tid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+    values (#{cost,jdbcType=DECIMAL}, #{tid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER},
       #{createTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{finished,jdbcType=INTEGER}
       )
   </insert>
@@ -108,4 +108,22 @@
       finished = #{finished,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectTasksByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from task_order
+    where uid=#{uid}
+  </select>
+  <select id="selectByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from task_order
+    where uid = #{uid, jdbcType=INTEGER}
+  </select>
+  <select id="selectByTid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from task_order
+    where tid = #{tid, jdbcType=INTEGER}
+  </select>
 </mapper>

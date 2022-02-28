@@ -19,13 +19,19 @@ public class TaskOrderController {
     private TaskOrderService taskOrderService;
 
     @PostMapping("/confirmTask")
-    @ApiOperation(value="众包工人：选择一个任务进行测试")
+    @ApiOperation(value="√ 众包工人：接受一个任务")
     public ResultVO<TaskOrderVO> createCourseOrder(@RequestParam Integer uid, @RequestParam Integer tid){
         return taskOrderService.confirmTask(uid,tid);
     }
 
-    @GetMapping("/worker_user/{uid}")
-    @ApiOperation(value="众包工人：查看已经完成的任务列表")
+    @GetMapping("/worker_user/unfinished/{uid}")
+    @ApiOperation(value="√ 众包工人：查看正在执行的任务列表")
+    public List<TaskVO> getUnfinishedTasks(@PathVariable Integer uid) {
+        return taskOrderService.getUnfinishedTasks(uid);
+    }
+
+    @GetMapping("/worker_user/finished/{uid}")
+    @ApiOperation(value="√ 众包工人：查看已经完成的任务列表")
     public List<TaskVO> getFinishedTasks(@PathVariable Integer uid) {
         return taskOrderService.getFinishedTasks(uid);
     }

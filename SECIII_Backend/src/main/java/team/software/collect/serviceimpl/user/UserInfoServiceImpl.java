@@ -48,7 +48,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             return new ResultVO<>(Constant.REQUEST_FAIL, "这个手机号尚未注册过账号。");
         }else{
             if(!userInfo.getPassword().equals(password))
-                return new ResultVO<>(Constant.REQUEST_FAIL, "账号或密码错误！");
+                return new ResultVO<>(Constant.REQUEST_FAIL, "密码错误！");
         }
         return new ResultVO<>(Constant.REQUEST_SUCCESS, "账号登陆成功！", new UserInfoVO(userInfoMapper.selectByPhone(phone)));
     }

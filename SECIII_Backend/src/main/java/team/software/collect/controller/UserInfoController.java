@@ -17,19 +17,19 @@ public class UserInfoController {
     @Resource
     private UserInfoService userInfoService;
 
-    @ApiOperation(value="注册")
+    @ApiOperation(value="√ 注册")
     @PostMapping("/register")
     public ResultVO<UserInfoVO> register(@RequestBody UserInfoVO userInfoVO){
         return userInfoService.userRegister(userInfoVO);
     }
 
-    @ApiOperation(value="登陆")
+    @ApiOperation(value="√ 登陆")
     @PostMapping("/login")
     public ResultVO<UserInfoVO> login(@RequestBody UserFormVO userForm){
         return userInfoService.userLogin(userForm.getPhone(), userForm.getPassword());
     }
 
-    @ApiOperation(value="用户已经正确登陆之后请求查看用户信息")
+    @ApiOperation(value="√ 用户已经正确登陆之后请求查看用户信息")
     @GetMapping("/{uid}")
     public UserInfoVO getUserInfo(@PathVariable Integer uid){
         return userInfoService.getUserInfo(uid);

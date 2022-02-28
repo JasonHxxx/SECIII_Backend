@@ -20,31 +20,36 @@ public class TaskController {
     @Resource
     private TaskService taskService;
 
-    //todo 在service层里排除已经招满工人的task
     @GetMapping("/post_user/{uid}")
-    @ApiOperation(value="发包方：获取已发布任务",tags={"<tag01>--获取任务列表"},notes="get请求")
+    @ApiOperation(value="√ 发包方：获取已发布任务")
     public List<TaskVO> getPostedTasks(@PathVariable Integer uid) {
         return taskService.getPostedTasks(uid);
     }
 
     @PostMapping("/create")
-    @ApiOperation(value="发包方：发布任务", notes="post请求，需要前端拿到文件后，先发送创建任务请求，请求成功了再发一个传文件请求，不可以先发文件，因为任务还没创建，文件无法找到对应的任务")
+    @ApiOperation(value="√ 发包方：发布任务", notes="post请求，需要前端拿到文件后，先发送创建任务请求，请求成功了再发一个传文件请求，不可以先发文件，因为任务还没创建，文件无法找到对应的任务")
     public ResultVO<TaskVO> postTask(@RequestBody TaskVO taskVO) {
         return taskService.postTask(taskVO);
     }
 
     @GetMapping("/all/{page}")
-    @ApiOperation(value="用户：获取任务大厅的任务（正在招募中的任务）", tags={"<tag01>--获取任务列表"}, notes="get请求，根据page请求任务大厅一定长度的任务列表")
+    @ApiOperation(value="√ 用户：获取任务大厅的任务（正在招募中的任务）", notes="get请求，根据page请求任务大厅一定长度的任务列表")
     @ApiImplicitParam(name = "page", value = "页码", paramType = "path", required = true)
     public PageInfo<TaskVO> getHallTasks(@PathVariable Integer page) {
         return taskService.getHallTasks(page, Constant.COURSE_PAGE_SIZE);
     }
 
-    //todo
     @GetMapping("/{tid}")
-    @ApiOperation(value="用户：查看任务的详细信息")
+    @ApiOperation(value="√ 用户：查看任务的详细信息")
     public TaskVO getTaskById(@RequestParam(required = false, defaultValue = "") Integer uid, @PathVariable Integer tid) {
         return taskService.getTaskDetail(tid, uid);
+    }
+
+    @GetMapping("/admin_all/{page}")
+    @ApiOperation(value="√ 系统用户：获取所有任务")
+    @ApiImplicitParam(name = "page", value = "页码", paramType = "path", required = true)
+    public PageInfo<TaskVO> getAllTasks(@PathVariable Integer page) {
+        return taskService.getAllTasks(page, Constant.COURSE_PAGE_SIZE);
     }
 
 

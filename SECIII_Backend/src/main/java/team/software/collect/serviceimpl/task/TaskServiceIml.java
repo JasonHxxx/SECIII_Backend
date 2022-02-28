@@ -1,5 +1,8 @@
 package team.software.collect.serviceimpl.task;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.stereotype.Service;
 import team.software.collect.mapperservice.task.TaskMapper;
 import team.software.collect.po.task.Task;
 import team.software.collect.service.task.TaskService;
@@ -7,9 +10,6 @@ import team.software.collect.util.Constant;
 import team.software.collect.util.PageInfoUtil;
 import team.software.collect.vo.ResultVO;
 import team.software.collect.vo.task.TaskVO;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -48,13 +48,40 @@ public class TaskServiceIml implements TaskService {
     public PageInfo<TaskVO> getHallTasks(Integer currPage, Integer pageSize){
         if(currPage==null || currPage<1) currPage=1;
         PageHelper.startPage(currPage, pageSize);
-        PageInfo<Task> po = new PageInfo<>(taskMapper.selectAll());
-        PageInfo<TaskVO> tasks = PageInfoUtil.convert(po, TaskVO.class);
-        return tasks;
+        List<Task> tasks=taskMapper.selectAll();
+        List<Task> tasksRecruiting=new ArrayList<>();
+        int len=tasks.size();
+        for(int i=0;i<len;i++){
+            if(!tasks.get(i).getWorkerCnt().equals(tasks.get(i).getMaxWorkers()))
+                tasksRecruiting.add(tasks.get(i));
+        }
+        PageInfo<Task> po = new PageInfo<>(tasksRecruiting);
+        PageInfo<TaskVO> pageTasks = PageInfoUtil.convert(po, TaskVO.class);
+        return pageTasks;
+    }
+
+    /*
+    可能需要实现的：权限认证
+     */
+    @Override
+    public TaskVO getTaskDetail(Integer taskId, Integer uid) {
+        Task taskFromDB = taskMapper.selectByPrimaryKey(taskId);
+        //一般查询结果不会是null
+        if(taskFromDB == null){
+            return new TaskVO();
+        }else{
+            return new TaskVO(taskFromDB);
+        }
     }
 
     @Override
-    public TaskVO getTaskDetail(Integer taskId, Integer uid) {
-        return null;
+    public PageInfo<TaskVO> getAllTasks(Integer currPage, Integer pageSize) {
+        //可以再加一个参数uid验证是否为系统用户
+        if(currPage==null || currPage<1) currPage=1;
+        PageHelper.startPage(currPage, pageSize);
+        List<Task> tasks=taskMapper.selectAll();
+        PageInfo<Task> po = new PageInfo<>(tasks);
+        PageInfo<TaskVO> pageTasks = PageInfoUtil.convert(po, TaskVO.class);
+        return pageTasks;
     }
 }

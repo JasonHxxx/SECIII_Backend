@@ -20,4 +20,5 @@ public interface TaskMapper {
     List<Task> selectByUid(Integer uid);
 
     List<Task> selectAll();
+
 }
