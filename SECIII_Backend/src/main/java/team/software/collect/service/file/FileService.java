@@ -7,6 +7,6 @@ import team.software.collect.vo.file.FileInfoVO;
 import javax.servlet.http.HttpServletResponse;
 
 public interface FileService {
-    ResultVO<FileInfoVO> uploadFile(MultipartFile file);
-    void downloadFile(String originName, String newName, HttpServletResponse response);
+    ResultVO<FileInfoVO> uploadFile(MultipartFile file, Integer role, Integer taskOrReportId);
+    void downloadFile(String fileName, HttpServletResponse response, Integer uid);
 }

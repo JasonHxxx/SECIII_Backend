@@ -29,6 +29,6 @@ logging:
 # 自定义标签 ${web.file-upload-path} 用于存储向服务器上传的文件
 web:
   file-upload-path: /app/
-#web:
-#  file-upload-path: D:/collect/upload/
+  fileLocation: static/files
+
 

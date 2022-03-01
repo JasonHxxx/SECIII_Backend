@@ -2,10 +2,8 @@ package team.software.collect.serviceimpl.report;
 
 import org.springframework.stereotype.Service;
 import team.software.collect.mapperservice.report.ReportMapper;
-import team.software.collect.mapperservice.task.TaskMapper;
 import team.software.collect.mapperservice.task.TaskOrderMapper;
 import team.software.collect.po.report.Report;
-import team.software.collect.po.task.Task;
 import team.software.collect.po.task.TaskOrder;
 import team.software.collect.service.report.ReportService;
 import team.software.collect.util.Constant;
@@ -46,6 +44,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<ReportVO> getReportsByTid(Integer userId, Integer taskId) {
+        //todo... 迭代二 任务大厅展示测试报告时，根据用户的id判断有没有查看权限   众包工人：有没有参与该任务、发包方：可以添加付费查看功能
         List<Report> reportList=reportMapper.selectByTid(taskId);
         List<ReportVO> reportVOS=new ArrayList<>();
         for(int i=0;i<reportList.size();i++)

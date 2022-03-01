@@ -62,7 +62,7 @@ CREATE TABLE `report`  (
 -- ----------------------------
 -- Records of report
 -- ----------------------------
-INSERT INTO `report` VALUES (1, 1, 1, 'reportIntro', 'no', 'no');
+INSERT INTO `report` VALUES (1, 2, 1, 'reportIntro', 'no', 'no');
 
 -- ----------------------------
 -- Table structure for task               cost字段暂时没有使用到
@@ -87,8 +87,8 @@ CREATE TABLE `task`  (
 -- ----------------------------
 -- Records of task
 -- ----------------------------
-INSERT INTO `task` VALUES (1, 1, 'task1', 'intro1', 100, 0, '2022-02-27 21:04:51', '2022-03-03 21:04:53', 'A', NULL);
-INSERT INTO `task` VALUES (2, 2, 'task2', 'intro2', 200, 0, '2022-02-27 21:12:43', '2022-03-04 21:12:47', 'B', NULL);
+INSERT INTO `task` VALUES (1, 1, 'task1', 'intro1', 100, 1, '2022-02-27 21:04:51', '2022-03-03 21:04:53', 'A', NULL);
+INSERT INTO `task` VALUES (2, 2, 'task2', 'intro2', 200, 1, '2022-02-27 21:12:43', '2022-03-04 21:12:47', 'B', NULL);
 
 -- ----------------------------
 -- Table structure for task_order
@@ -112,8 +112,8 @@ CREATE TABLE `task_order`  (
 -- ----------------------------
 -- Records of task_order
 -- ----------------------------
-INSERT INTO `task_order` VALUES (1, NULL, 1, 1, '2022-02-27 21:05:29', NULL, 0);
-INSERT INTO `task_order` VALUES (2, NULL, 2, 1, '2022-02-27 21:13:37', NULL, 1);
+INSERT INTO `task_order` VALUES (1, NULL, 1, 2, '2022-02-27 21:05:29', NULL, 1);
+INSERT INTO `task_order` VALUES (2, NULL, 2, 2, '2022-02-27 21:13:37', NULL, 0);
 
 -- ----------------------------
 -- Table structure for user_info

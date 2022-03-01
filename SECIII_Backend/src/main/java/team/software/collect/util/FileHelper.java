@@ -1,4 +1,5 @@
 package team.software.collect.util;
+import org.springframework.util.ResourceUtils;
 import team.software.collect.enums.ExceptionType;
 import team.software.collect.exception.MyException;
 import team.software.collect.vo.file.FileInfoVO;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.UUID;
 
 @Slf4j
@@ -25,11 +27,32 @@ public class FileHelper {
      * @param file 文件
      * @return 保存成功后的文件名
      */
-    public static FileInfoVO save(String directoryPath, MultipartFile file) throws IOException{
-        if(!checkDirectoryPath(directoryPath)){
-            throw MyException.of(ExceptionType.SERVER_ERROR, "服务器端错误，用于存放上传文件的文件夹不存在或创建失败！");
+    public static FileInfoVO save(String directoryPath, String fileLocation, MultipartFile file, Integer role, Integer taskOrReportId) throws IOException{
+        String basePath = ResourceUtils.getURL("classpath:").getPath();
+        String realPath=basePath+fileLocation;
+        File newFile = new File(realPath);
+        // 如果文件夹不存在、则新建
+        if (!newFile.exists())
+            newFile.mkdirs();
+        String fileName=null;
+        //对即将存入的图片进行格式化命名
+        if(role==1)
+            fileName = "file."+taskOrReportId+".(tid)."+file.getOriginalFilename();
+        else
+            fileName = "pic."+taskOrReportId+".(rid)."+file.getOriginalFilename();
+        //将时间中的冒号改为'.'，因为文件名中不允许有':'
+        fileName=fileName.replace(':', '.');
+
+        //查找是否已经上传过该图片：发包方对同一个任务不能上传两个相同的文件 众包工人对一个报告不能上传两张相同的图片
+        File baseDir = new File(realPath);
+        File[] files = baseDir.listFiles();
+        File tempFile=null;
+        for (int i = 0; i < files.length; i++) {
+            tempFile=files[i];
+            if(tempFile.getName().equals(fileName))
+                throw MyException.of(ExceptionType.SERVER_ERROR, "您已经上传过该文件！");
         }
-        // 原文件名
+
         String originalName = file.getOriginalFilename();
         String newName;
         String type = "unknown";
@@ -39,13 +62,16 @@ public class FileHelper {
             String ext = originalName.substring(originalName.lastIndexOf("."));
             type = originalName.substring(originalName.lastIndexOf(".")+1);
             // 构造新文件名
-            newName = UUID.randomUUID() + ext;
+            newName=fileName;
         }else
             newName = UUID.randomUUID().toString();
         // 根据目标地址构造文件输出流
-        FileOutputStream fileOutputStream = new FileOutputStream(directoryPath + newName);
+        String storePath=realPath+"/";
+        FileOutputStream fileOutputStream1 = new FileOutputStream(directoryPath + newName);
+        FileOutputStream fileOutputStream2 = new FileOutputStream(storePath + newName);
         // 将文件复制到映射的地址
-        FileCopyUtils.copy(file.getInputStream(),fileOutputStream);
+        //FileCopyUtils.copy(file.getInputStream(),fileOutputStream1);//存储到本地，测试用，目录在D:\app
+        FileCopyUtils.copy(file.getInputStream(),fileOutputStream2);
 
         return new FileInfoVO(newName, type, size);
     }
@@ -78,6 +104,8 @@ public class FileHelper {
         }
         return false;
     }
+
+
 
     /**
      * 检查目录路径是否有效，若当前路径对应的目录不存在，则尝试创建目录
