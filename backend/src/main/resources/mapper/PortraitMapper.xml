@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.software.collect.mapperservice.user.PortraitMapper">
+  <resultMap id="BaseResultMap" type="team.software.collect.po.user.Portrait">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="ability" jdbcType="DECIMAL" property="ability" />
+    <result column="preference" jdbcType="VARCHAR" property="preference" />
+    <result column="activity" jdbcType="DECIMAL" property="activity" />
+    <result column="device" jdbcType="VARCHAR" property="device" />
+    <result column="commentsNum" jdbcType="INTEGER" property="commentsNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, `uid`, ability, preference, activity, device, commentsNum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from portrait
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from portrait
+  </select>
+  <select id="selectByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from portrait
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from portrait
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="team.software.collect.po.user.Portrait" useGeneratedKeys="true">
+    insert into portrait (`uid`, ability, preference,
+      activity, device, commentsNum)
+    values (#{uid,jdbcType=INTEGER}, #{ability,jdbcType=DECIMAL}, #{preference,jdbcType=VARCHAR},
+      #{activity,jdbcType=DECIMAL}, #{device,jdbcType=VARCHAR}, #{commentsNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="team.software.collect.po.user.Portrait" useGeneratedKeys="true">
+    insert into portrait
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="ability != null">
+        ability,
+      </if>
+      <if test="preference != null">
+        preference,
+      </if>
+      <if test="activity != null">
+        activity,
+      </if>
+      <if test="device != null">
+        device,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="ability != null">
+        #{ability,jdbcType=DECIMAL},
+      </if>
+      <if test="preference != null">
+        #{preference,jdbcType=VARCHAR},
+      </if>
+      <if test="activity != null">
+        #{activity,jdbcType=DECIMAL},
+      </if>
+      <if test="device != null">
+        #{device,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.software.collect.po.user.Portrait">
+    update portrait
+    <set>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="ability != null">
+        ability = #{ability,jdbcType=DECIMAL},
+      </if>
+      <if test="preference != null">
+        preference = #{preference,jdbcType=VARCHAR},
+      </if>
+      <if test="activity != null">
+        activity = #{activity,jdbcType=DECIMAL},
+      </if>
+      <if test="device != null">
+        device = #{device,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.software.collect.po.user.Portrait">
+    update portrait
+    set `uid` = #{uid,jdbcType=INTEGER},
+      ability = #{ability,jdbcType=DECIMAL},
+      preference = #{preference,jdbcType=VARCHAR},
+      activity = #{activity,jdbcType=DECIMAL},
+      device = #{device,jdbcType=VARCHAR},
+        commentsNum=#{commentsNum,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

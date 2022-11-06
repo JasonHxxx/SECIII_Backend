@@ -1,0 +1,76 @@
+pipeline {
+    agent none
+    stages {
+        stage('pull code') {
+            agent any
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'df8104fe-971a-4486-875a-d93951ef1d07', url: 'git@git.nju.edu.cn:191250011/backend-collect_seciii.git']]])
+            }
+        }
+        stage('Test') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                sh 'mvn test'
+            }
+
+        }
+        stage('JaCoCo') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps{
+                step([$class: 'JacocoPublisher',
+                        execPattern: 'target/*.exec',
+                        classPattern: 'target/classes',
+                        sourcePattern: 'src/main/java',
+                        exclusionPattern: 'src/test*'
+                        // 'src/main/java/team/software/collect/config/**',
+                        // 'src/main/java/team/software/collect/enums/**',
+                        // 'src/main/java/team/software/collect/exception/**',
+                        // 'src/main/java/team/software/collect/service/**',
+                        // 'src/main/java/team/software/collect/po/**',
+                        // 'src/main/java/team/software/collect/vo/**',
+                        // 'src/main/java/team/software/collect/CollectApplication'
+                    ])
+            }
+        }
+        stage('Deliver') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+            steps {
+                sh 'mvn jar:jar install:install help:evaluate -Dexpression=project.name'
+            }
+        }
+        stage('Launch') {
+            agent any
+            steps {
+                sh 'pwd'
+                sh 'chmod +x start_collect_backend.sh'
+                sh "./start_collect_backend.sh"
+            }
+            post {
+                failure {
+                    updateGitlabCommitStatus name: 'deployed', state: 'failed'
+                    echo "post condition executed: failure ..."
+                }
+                success {
+                    // echo "post condition executed: success ..."
+                    updateGitlabCommitStatus name: 'deployed', state: 'success'
+                    echo "post condition executed: success ..."
+                }
+            }
+        }
+    }
+}

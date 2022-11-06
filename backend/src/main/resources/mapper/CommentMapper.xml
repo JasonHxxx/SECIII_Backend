@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.software.collect.mapperservice.report.CommentMapper">
+  <resultMap id="BaseResultMap" type="team.software.collect.po.report.Comment">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="score" jdbcType="DECIMAL" property="score" />
+    <result column="comments" jdbcType="VARCHAR" property="comments" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cid, rid, `uid`, score, comments
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from comment
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comment
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="cid" keyProperty="cid" parameterType="team.software.collect.po.report.Comment" useGeneratedKeys="true">
+    insert into comment (rid, `uid`, score,
+      comments)
+    values (#{rid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{score,jdbcType=DECIMAL},
+      #{comments,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="cid" keyProperty="cid" parameterType="team.software.collect.po.report.Comment" useGeneratedKeys="true">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="comments != null">
+        comments,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.software.collect.po.report.Comment">
+    update comment
+    <set>
+      <if test="rid != null">
+        rid = #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="comments != null">
+        comments = #{comments,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.software.collect.po.report.Comment">
+    update comment
+    set rid = #{rid,jdbcType=INTEGER},
+      `uid` = #{uid,jdbcType=INTEGER},
+      score = #{score,jdbcType=DECIMAL},
+      comments = #{comments,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByRid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from comment
+    where rid = #{rid, jdbcType=INTEGER}
+  </select>
+</mapper>
